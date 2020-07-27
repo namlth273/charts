@@ -1,0 +1,20 @@
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "worker.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    deploymentName: {{ include "worker.fullname" . }}
+    {{- include "worker.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    deploymentName: {{ include "worker.fullname" . }}
+  pollingInterval: 5   # Optional. Default: 30 seconds
+  cooldownPeriod: 30   # Optional. Default: 300 seconds
+  maxReplicaCount: 30  # Optional. Default: 100
+  triggers:
+  - type: rabbitmq
+    metadata:
+      queueName: Demo.Workers.User.UserCreatedConsumer
+      host: RabbitMqHost
+      queueLength  : '5'

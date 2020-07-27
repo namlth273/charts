@@ -1,2 +1,3 @@
 # charts
-Helm chart repo
+Helm chart repo with Helm secret to manage secrets (Ex: credentails...)
+
