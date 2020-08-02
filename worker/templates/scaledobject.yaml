@@ -15,6 +15,6 @@ spec:
   triggers:
   - type: rabbitmq
     metadata:
-      queueName: Demo.Workers.User.UserCreatedConsumer
+      queueName: {{ .Values.env.RabbitMq.QueueName }}
       host: RabbitMqHost
-      queueLength  : '5'
+      queueLength  : '1'
