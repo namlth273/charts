@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "worker.fullname" . }}
+  name: {{ .Release.Name }}
   labels:
     {{- include "worker.labels" . | nindent 4 }}
 spec:
@@ -21,7 +21,7 @@ spec:
           envFrom:
             - secretRef:
                 # The secret resource we are reading from
-                name: {{ include "worker.fullname" . }}
+                name: {{ .Release.Name }}
           env:
           - name: RabbitMq__Host
             value: {{ .Values.env.RabbitMq.Host }}
@@ -31,14 +31,14 @@ spec:
             valueFrom:
               secretKeyRef:
                 # The secret resource we are reading from
-                name: {{ include "worker.fullname" . }}
+                name: {{ .Release.Name }}
                 # This key is read from our helm-secret secrets.yaml
                 key: RabbitMqUsername
           - name: RabbitMq__Password
             valueFrom:
               secretKeyRef:
                 # The secret resource we are reading from
-                name: {{ include "worker.fullname" . }}
+                name: {{ .Release.Name }}
                 # This key is read from our helm-secret secrets.yaml
                 key: RabbitMqPassword
           - name: Serilog__WriteTo__0__Args__serverUrl
