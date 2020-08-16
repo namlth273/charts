@@ -3,10 +3,10 @@
 replicaCount: 0
 
 image:
-  repository: localhost:32000/demo-workers-user
+  repository: demo-workers-user
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: registry
+  tag: 0.0.1
 
 env:
   RabbitMq:
@@ -14,7 +14,7 @@ env:
     VirtualHost: /
     QueueName: Demo.Workers.User.UserCreatedConsumer
   Serilog:
-    Url: http://my-seq.dev:5341
+    Url: http://my-seq.dev.svc.cluster.local
 
 imagePullSecrets: []
 nameOverride: ""

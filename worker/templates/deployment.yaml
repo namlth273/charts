@@ -41,7 +41,7 @@ spec:
                 name: {{ .Release.Name }}
                 # This key is read from our helm-secret secrets.yaml
                 key: RabbitMqPassword
-          - name: Serilog__WriteTo__0__Args__serverUrl
+          - name: Serilog__WriteTo__1__Args__serverUrl
             value: {{ .Values.env.Serilog.Url }}
           ports:
             - name: http
